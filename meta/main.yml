@@ -1,0 +1,41 @@
+galaxy_info:
+  role_name: opentofu
+  author: diodonfrost
+  company: diodonfrost
+  description: Ansible role to install the latest version of Opentofu
+  license: Apache Software License 2.0
+
+  min_ansible_version: 2.10
+
+  platforms:
+    - name: EL
+      versions:
+        - all
+    - name: Fedora
+      versions:
+        - all
+    - name: Debian
+      versions:
+        - all
+    - name: Ubuntu
+      versions:
+        - all
+    - name: FreeBSD
+      versions:
+        - all
+    - name: OpenBSD
+      versions:
+        - all
+    - name: MacOSX
+      versions:
+        - all
+    - name: Windows
+      versions:
+        - all
+
+  galaxy_tags:
+    - cloud
+    - opentofu
+    - gruntwork
+
+dependencies: []
