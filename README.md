@@ -6,26 +6,57 @@ Ansible role to install the latest version of Opentofu
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+This role requires:
+- Ansible 2.10 or higher
+- Python 3.x
+- Unzip package (for extracting the OpenTofu binary)
+- Internet access to download OpenTofu from GitHub releases
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+The following variables are available:
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `opentofu_version` | Version of OpenTofu to install. Use 'latest' for the most recent version or specify a version like 'v1.6.0' | `latest` |
+| `opentofu_path` | Directory where OpenTofu binary will be installed | `/usr/local/bin` (Linux) |
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+This role has no dependencies on other roles.
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+Basic usage:
 
-    - hosts: servers
-      roles:
-         - role: diodonfrost.ansible-role-opentofu
+```yaml
+- hosts: servers
+  roles:
+    - role: diodonfrost.ansible-role-opentofu
+```
+
+With custom version:
+
+```yaml
+- hosts: servers
+  roles:
+    - role: diodonfrost.ansible-role-opentofu
+      vars:
+        opentofu_version: "v1.6.0"
+```
+
+With custom installation path:
+
+```yaml
+- hosts: servers
+  roles:
+    - role: diodonfrost.ansible-role-opentofu
+      vars:
+        opentofu_path: "/opt/opentofu/bin"
+```
 
 Local Testing
 -------------
@@ -50,23 +81,14 @@ Testing with Docker
 # Install requirements
 pip install -r requirements-dev.txt
 
-# Test ansible role with ubuntu 22.04
+# Test ansible role with ubuntu 24.04
 molecule test
 
-# Test ansible role with ubuntu 20.04
-image=ansible-ubuntu:20.04 molecule test
+# Test ansible role with ubuntu 22.04
+image=ansible-ubuntu:22.04 molecule test
 
 # Test ansible role with alpine latest
 image=ansible-alpine:latest molecule test
-
-# Create centos 7 instance
-image=ansible-centos:7 molecule create
-
-# Apply role on centos 7 instance
-image=ansible-centos:7 molecule converge
-
-# Launch tests on centos 7 instance
-image=ansible-centos:7 molecule verify
 ```
 
 Testing with Vagrant and Libvirt
@@ -82,6 +104,20 @@ molecule test -s openbsd
 # Test ansible role with Windows
 molecule test -s windows
 ```
+
+Supported Platforms
+------------------
+
+The role is tested and supported on the following platforms:
+
+* EL (Enterprise Linux)
+* Fedora
+* Debian
+* Ubuntu
+* FreeBSD
+* OpenBSD
+* MacOSX
+* Windows
 
 License
 -------

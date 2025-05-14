@@ -1,0 +1,41 @@
+---
+# tasks file for install OpenTofu on Linux system
+
+- name: Linux | Get the latest published full release for the repository
+  ansible.builtin.uri:
+    url: https://api.github.com/repos/opentofu/opentofu/releases/latest
+    return_content: yes
+    headers:
+      Accept: application/vnd.github.v3+json
+      User-Agent: Ansible
+  register: opentofu_index
+  check_mode: no
+  when: opentofu_version == "latest"
+
+- name: Linux | Filter the latest OpenTofu version
+  ansible.builtin.set_fact:
+    opentofu_version_to_install: "{{ (opentofu_index.content | from_json).name }}"
+  when: opentofu_version == "latest"
+
+- name: Linux | Use the specified OpenTofu version when latest var is not define
+  ansible.builtin.set_fact:
+    opentofu_version_to_install: "{{ opentofu_version }}"
+  when: opentofu_version != "latest"
+
+# This task avoids downloading OpenTofu every time
+- name: Linux | Check if OpenTofu is present with the right version
+  ansible.builtin.command: "{{ opentofu_path }}/tofu --version"
+  register: opentofu_installed_version
+  ignore_errors: true
+  changed_when: false
+  failed_when: false
+
+- name: Linux | Install OpenTofu
+  ansible.builtin.unarchive:
+    src: "{{ opentofu_url }}"
+    dest: "{{ opentofu_path }}"
+    remote_src: true
+    mode: u+x,g+x,o+x
+    include:
+      - tofu
+  when: opentofu_version_to_install not in opentofu_installed_version.stdout | default('empty')
