@@ -32,7 +32,7 @@
 
 - name: Linux/Unix | Install OpenTofu
   ansible.builtin.unarchive:
-    src: "{{ opentofu_url }}"
+    src: "{{ opentofu_pkg_url }}"
     dest: "{{ opentofu_path }}"
     remote_src: true
     mode: u+x,g+x,o+x

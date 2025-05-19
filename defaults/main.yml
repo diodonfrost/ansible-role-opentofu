@@ -8,8 +8,8 @@ opentofu_version: latest
 
 # Define where to install OpenTofu binary
 # Default: use local system path defined in Ansible vars/*.yml
-opentofu_path: "{{ _opentofu_default_path }}"
+opentofu_path: "{{ opentofu_default_path }}"
 
 # Define the URL of the OpenTofu binary to download
 # Default: use the URL defined in Ansible vars/*.yml
-opentofu_url: "{{ _opentofu_default_url }}"
+opentofu_pkg_url: "{{ opentofu_default_pkg_url }}"
