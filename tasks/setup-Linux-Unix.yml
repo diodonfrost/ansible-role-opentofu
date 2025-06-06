@@ -36,6 +36,8 @@
     dest: "{{ opentofu_path }}"
     remote_src: true
     mode: u+x,g+x,o+x
-    include:
-      - tofu
+    exclude:
+      - "CHANGELOG.md"
+      - "LICENSE"
+      - "README.md"
   when: opentofu_version_to_install not in opentofu_installed_version.stdout | default('empty')
