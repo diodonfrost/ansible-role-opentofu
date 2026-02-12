@@ -2,6 +2,12 @@
 - name: Verify
   hosts: all
   tasks:
-    - name: Example assertion
+    - name: Windows | OpenTofu should be functionnal
+      ansible.windows.win_command: tofu --version
+      register: opentofu_result
+
+    - name: Windows | Verify commands outputs
       ansible.builtin.assert:
-        that: true
+        that:
+          - opentofu_result.rc == 0
+        success_msg: "All tests passed"

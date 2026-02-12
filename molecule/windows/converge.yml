@@ -1,8 +1,5 @@
 ---
 - name: Converge
   hosts: all
-  become: true
-  tasks:
-    - name: "Include ansible-role-ansible-role-opentofu"
-      ansible.builtin.include_role:
-        name: "ansible-role-ansible-role-opentofu"
+  roles:
+    - role: diodonfrost.opentofu
