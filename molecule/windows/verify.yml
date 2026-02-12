@@ -5,6 +5,7 @@
     - name: Windows | OpenTofu should be functional
       ansible.windows.win_command: tofu --version
       register: opentofu_result
+      changed_when: false
 
     - name: Windows | Verify commands outputs
       ansible.builtin.assert:

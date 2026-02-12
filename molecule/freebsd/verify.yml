@@ -5,6 +5,7 @@
     - name: FreeBSD | OpenTofu should be functional
       ansible.builtin.command: tofu --version
       register: opentofu_result
+      changed_when: false
 
     - name: FreeBSD | Verify commands outputs
       ansible.builtin.assert:
