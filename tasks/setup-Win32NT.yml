@@ -30,8 +30,8 @@
 - name: Windows | Download opentofu
   ansible.windows.win_get_url:
     url: "{{ opentofu_pkg_url }}"
-    dest: '%TEMP%\opentofu_{{ opentofu_version }}_windows_amd64.zip'
-  when: opentofu_version not in ( opentofu_installed_version.stdout_lines | default(['empty']) | first )
+    dest: '%TEMP%\opentofu_{{ opentofu_version_to_install }}_windows_amd64.zip'
+  when: opentofu_version_to_install not in ( opentofu_installed_version.stdout_lines | default(['empty']) | first )
 
 - name: Windows | Create opentofu folder
   ansible.windows.win_file:
@@ -40,9 +40,9 @@
 
 - name: Windows | Install opentofu
   community.windows.win_unzip:
-    src: '%TEMP%\opentofu_{{ opentofu_version }}_windows_amd64.zip'
+    src: '%TEMP%\opentofu_{{ opentofu_version_to_install }}_windows_amd64.zip'
     dest: "{{ opentofu_path }}"
-  when: opentofu_version not in ( opentofu_installed_version.stdout_lines | default(['empty']) | first )
+  when: opentofu_version_to_install not in ( opentofu_installed_version.stdout_lines | default(['empty']) | first )
 
 - name: Windows | Add opentofu to PATH
   ansible.windows.win_path:
