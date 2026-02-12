@@ -2,6 +2,12 @@
 - name: Verify
   hosts: all
   tasks:
-    - name: Example assertion
+    - name: OpenBSD | OpenTofu should be functionnal
+      ansible.builtin.command: tofu --version
+      register: opentofu_result
+
+    - name: OpenBSD | Verify commands outputs
       ansible.builtin.assert:
-        that: true
+        that:
+          - opentofu_result.rc == 0
+        success_msg: "All tests passed"
