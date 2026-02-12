@@ -2,7 +2,7 @@
 - name: Verify
   hosts: all
   tasks:
-    - name: FreeBSD | OpenTofu should be functionnal
+    - name: FreeBSD | OpenTofu should be functional
       ansible.builtin.command: tofu --version
       register: opentofu_result
 

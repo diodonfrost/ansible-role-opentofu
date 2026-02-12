@@ -2,7 +2,7 @@
 - name: Verify
   hosts: all
   tasks:
-    - name: Windows | OpenTofu should be functionnal
+    - name: Windows | OpenTofu should be functional
       ansible.windows.win_command: tofu --version
       register: opentofu_result
 
