@@ -9,7 +9,7 @@
       Accept: application/vnd.github.v3+json
       User-Agent: Ansible
   register: opentofu_index
-  check_mode: no
+  check_mode: false
   when: opentofu_version == "latest"
 
 - name: Linux/Unix | Filter the latest OpenTofu version
