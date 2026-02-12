@@ -40,4 +40,4 @@
       - "CHANGELOG.md"
       - "LICENSE"
       - "README.md"
-  when: opentofu_version_to_install not in opentofu_installed_version.stdout | default('empty')
+  when: opentofu_version_to_install not in (opentofu_installed_version.stdout | default('empty'))
