@@ -1,4 +1,4 @@
 ---
 # vars file for opentofu in Windows system
 opentofu_default_pkg_url: "https://github.com/opentofu/opentofu/releases/download/{{ opentofu_version_to_install }}/tofu_{{ opentofu_version_to_install | replace('v', '') }}_windows_{{ base_arch[ansible_architecture] | default('amd64') }}.zip"
-opentofu_default_path: C:\HashiCorp\terraform\bin\
+opentofu_default_path: C:\HashiCorp\opentofu\bin\
