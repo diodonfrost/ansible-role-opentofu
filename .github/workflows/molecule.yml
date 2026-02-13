@@ -3,6 +3,7 @@ name: molecule
 on:
   push:
   pull_request:
+  workflow_dispatch:
   schedule:
     - cron: '0 18 * * sun'
 
