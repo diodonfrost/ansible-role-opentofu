@@ -10,6 +10,9 @@
       User-Agent: Ansible
   register: opentofu_index
   check_mode: false
+  retries: 3
+  delay: 5
+  until: opentofu_index is success
   when: opentofu_version == "latest"
 
 - name: Linux/Unix | Filter the latest OpenTofu version
