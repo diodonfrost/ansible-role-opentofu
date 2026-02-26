@@ -4,7 +4,7 @@ driver:
   provider:
     name: libvirt
 platforms:
-  - name: windows-10
+  - name: opentofu-windows-10
     box: peru/windows-10-enterprise-x64-eval
     memory: 4096
     cpus: 4
