@@ -20,7 +20,8 @@ The following variables are available:
 | Variable | Description | Default |
 |----------|-------------|---------|
 | `opentofu_version` | Version of OpenTofu to install. Use 'latest' for the most recent version or specify a version like 'v1.6.0' | `latest` |
-| `opentofu_path` | Directory where OpenTofu binary will be installed | `/usr/local/bin` (Linux) |
+| `opentofu_path` | Directory where OpenTofu binary will be installed | `{{ _opentofu_default_path }}` |
+| `opentofu_pkg_url` | Full URL to the OpenTofu zip archive to download | `{{ _opentofu_default_pkg_url }}` |
 
 Dependencies
 ------------

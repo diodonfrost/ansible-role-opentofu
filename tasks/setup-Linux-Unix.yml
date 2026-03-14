@@ -17,12 +17,12 @@
 
 - name: Linux/Unix | Filter the latest OpenTofu version
   ansible.builtin.set_fact:
-    opentofu_version_to_install: "{{ (opentofu_index.content | from_json).name }}"
+    _opentofu_version_to_install: "{{ (opentofu_index.content | from_json).name }}"
   when: opentofu_version == "latest"
 
 - name: Linux/Unix | Use the specified OpenTofu version when latest var is not define
   ansible.builtin.set_fact:
-    opentofu_version_to_install: "{{ opentofu_version }}"
+    _opentofu_version_to_install: "{{ opentofu_version }}"
   when: opentofu_version != "latest"
 
 # This task avoids downloading OpenTofu every time
@@ -43,4 +43,4 @@
       - "CHANGELOG.md"
       - "LICENSE"
       - "README.md"
-  when: opentofu_version_to_install not in (opentofu_installed_version.stdout | default('empty'))
+  when: _opentofu_version_to_install not in (opentofu_installed_version.stdout | default('empty'))

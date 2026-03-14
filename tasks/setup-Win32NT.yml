@@ -14,12 +14,12 @@
 
 - name: Windows | Finds the latest OpenTofu version when latest var is define
   ansible.builtin.set_fact:
-    opentofu_version_to_install: "{{ (opentofu_index.content | from_json).name }}"
+    _opentofu_version_to_install: "{{ (opentofu_index.content | from_json).name }}"
   when: opentofu_version == "latest"
 
 - name: Windows | Use the specified OpenTofu version when latest var is not define
   ansible.builtin.set_fact:
-    opentofu_version_to_install: "{{ opentofu_version }}"
+    _opentofu_version_to_install: "{{ opentofu_version }}"
   when: opentofu_version != "latest"
 
 # This task avoids downloading OpenTofu every time
@@ -33,8 +33,8 @@
 - name: Windows | Download OpenTofu
   ansible.windows.win_get_url:
     url: "{{ opentofu_pkg_url }}"
-    dest: "%TEMP%\\opentofu_{{ opentofu_version_to_install }}_windows_{{ base_arch[ansible_facts['architecture']] }}.zip"
-  when: opentofu_version_to_install not in (opentofu_installed_version.stdout_lines | default(['empty']) | first)
+    dest: "%TEMP%\\opentofu_{{ _opentofu_version_to_install }}_windows_{{ _opentofu_arch_map[ansible_facts['architecture']] }}.zip"
+  when: _opentofu_version_to_install not in (opentofu_installed_version.stdout_lines | default(['empty']) | first)
 
 - name: Windows | Create OpenTofu folder
   ansible.windows.win_file:
@@ -43,9 +43,9 @@
 
 - name: Windows | Install OpenTofu
   community.windows.win_unzip:
-    src: "%TEMP%\\opentofu_{{ opentofu_version_to_install }}_windows_{{ base_arch[ansible_facts['architecture']] }}.zip"
+    src: "%TEMP%\\opentofu_{{ _opentofu_version_to_install }}_windows_{{ _opentofu_arch_map[ansible_facts['architecture']] }}.zip"
     dest: "{{ opentofu_path }}"
-  when: opentofu_version_to_install not in (opentofu_installed_version.stdout_lines | default(['empty']) | first)
+  when: _opentofu_version_to_install not in (opentofu_installed_version.stdout_lines | default(['empty']) | first)
 
 - name: Windows | Add OpenTofu to PATH
   ansible.windows.win_path:

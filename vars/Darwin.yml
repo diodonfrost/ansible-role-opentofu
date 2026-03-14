@@ -1,4 +1,4 @@
 ---
 # vars file for opentofu in Mac osx system
-opentofu_default_pkg_url: "https://github.com/opentofu/opentofu/releases/download/{{ opentofu_version_to_install }}/tofu_{{ opentofu_version_to_install | replace('v', '') }}_darwin_{{ base_arch[ansible_facts['architecture']] }}.zip"
-opentofu_default_path: /usr/local/bin
+_opentofu_default_pkg_url: "https://github.com/opentofu/opentofu/releases/download/{{ _opentofu_version_to_install }}/tofu_{{ _opentofu_version_to_install | replace('v', '') }}_darwin_{{ _opentofu_arch_map[ansible_facts['architecture']] }}.zip"
+_opentofu_default_path: /usr/local/bin
