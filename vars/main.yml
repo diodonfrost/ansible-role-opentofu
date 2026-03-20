@@ -8,3 +8,4 @@ _opentofu_arch_map:
   aarch64: 'arm64'
   armv7l: 'arm'
   armv6l: 'arm'
+  64-bit: 'amd64'
