@@ -13,3 +13,11 @@ opentofu_path: "{{ _opentofu_default_path }}"
 # Define the URL of the OpenTofu binary to download
 # Default: use the URL defined in Ansible vars/*.yml
 opentofu_pkg_url: "{{ _opentofu_default_pkg_url }}"
+
+# Enable SHA256 checksum verification of the downloaded archive
+# Default: true
+opentofu_checksum_verify: true
+
+# Define the URL of the SHA256SUMS file used to verify the downloaded archive
+# Default: use the URL defined in Ansible vars/main.yml
+opentofu_checksum_url: "{{ _opentofu_default_checksum_url }}"

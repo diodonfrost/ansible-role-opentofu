@@ -33,9 +33,17 @@
   changed_when: false
   failed_when: false
 
+- name: Linux/Unix | Download OpenTofu archive
+  ansible.builtin.get_url:
+    url: "{{ opentofu_pkg_url }}"
+    dest: "/tmp/tofu_{{ _opentofu_version_to_install }}.zip"
+    checksum: "{{ ('sha256:' + opentofu_checksum_url) if opentofu_checksum_verify else omit }}"
+    mode: '0644'
+  when: _opentofu_version_to_install not in (opentofu_installed_version.stdout | default('empty'))
+
 - name: Linux/Unix | Install OpenTofu
   ansible.builtin.unarchive:
-    src: "{{ opentofu_pkg_url }}"
+    src: "/tmp/tofu_{{ _opentofu_version_to_install }}.zip"
     dest: "{{ opentofu_path }}"
     remote_src: true
     mode: u+x,g+x,o+x

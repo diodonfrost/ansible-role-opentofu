@@ -22,6 +22,8 @@ The following variables are available:
 | `opentofu_version` | Version of OpenTofu to install. Use 'latest' for the most recent version or specify a version like 'v1.6.0' | `latest` |
 | `opentofu_path` | Directory where OpenTofu binary will be installed | `{{ _opentofu_default_path }}` |
 | `opentofu_pkg_url` | Full URL to the OpenTofu zip archive to download | `{{ _opentofu_default_pkg_url }}` |
+| `opentofu_checksum_verify` | Whether to verify the SHA256 checksum of the downloaded archive | `true` |
+| `opentofu_checksum_url` | Full URL to the OpenTofu SHA256SUMS file used to verify the downloaded archive | `{{ _opentofu_default_checksum_url }}` |
 
 Dependencies
 ------------
