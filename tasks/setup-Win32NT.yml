@@ -36,6 +36,7 @@
     dest: "%TEMP%\\opentofu_{{ _opentofu_version_to_install }}_windows_{{ _opentofu_arch_map[ansible_facts['architecture']] }}.zip"
     checksum_url: "{{ opentofu_checksum_url if opentofu_checksum_verify else omit }}"
     checksum_algorithm: "{{ 'sha256' if opentofu_checksum_verify else omit }}"
+  check_mode: false
   when: _opentofu_version_to_install not in (opentofu_installed_version.stdout_lines | default(['empty']) | first)
 
 - name: Windows | Create OpenTofu folder
